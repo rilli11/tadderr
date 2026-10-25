@@ -1,0 +1,25 @@
+رفع الموقع أونلاين بـ Cloudflare — أبسط طريقة (بدون تسجيل دخول)
+
+على جهازك (Windows/Mac) بعد تثبيت Node.js:
+
+1) شغّل الموقع:
+     node server.js
+
+2) نزّل cloudflared من:  https://github.com/cloudflare/cloudflared/releases/latest
+   (Windows: cloudflared-windows-amd64.exe — Mac: brew install cloudflared)
+
+3) في نافذة ثانية:
+     cloudflared tunnel --url http://localhost:3000
+
+   يعطيك رابط مثل  https://xxxx.trycloudflare.com  — افتحه من أي جهاز.
+   الرابط يعمل طالما جهازك شغّال والنافذتان مفتوحتان.
+
+لرابط ثابت دائم (يحتاج حساب Cloudflare مجاني):
+     cloudflared tunnel login
+     cloudflared tunnel create club
+     cloudflared tunnel route dns club club.yourdomain.com
+     cloudflared tunnel run --url http://localhost:3000 club
+(يحتاج دومين على Cloudflare.)
+
+ملاحظة: Cloudflare Pages للمواقع الثابتة فقط ولا يشغّل server.js؛ لذلك نستخدم النفق.
+تنبيه أمان: السيرفر بلا صلاحيات — أي شخص عنده الرابط يقدر يقرأ ويكتب. لا تنشر الرابط إلا للجنة.
